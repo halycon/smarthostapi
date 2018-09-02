@@ -1,5 +1,6 @@
 package com.halycon.smarthostapi;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,4 +39,9 @@ public class SmarthostapiApplication {
 		return restTemplate;
 
 	}
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper().configure(JsonParser.Feature.ALLOW_TRAILING_COMMA, true);
+    }
 }
