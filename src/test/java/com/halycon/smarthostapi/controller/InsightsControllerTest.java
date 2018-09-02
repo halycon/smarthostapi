@@ -58,6 +58,56 @@ public class InsightsControllerTest {
     }
 
     @Test
+    public void getOptimizedOccupancySummary_E5P7_Returns189_1054() {
+        OccupancyOptimizationRequest request = new OccupancyOptimizationRequest();
+        List<RoomStock> roomStocks = new ArrayList<>();
+        roomStocks.add(new RoomStock(RoomType.ECONOMY,BigDecimal.ZERO,5));
+        roomStocks.add(new RoomStock(RoomType.PREMIUM,BigDecimal.valueOf(100),7));
+        request.setRoomStockList(roomStocks);
+        request.setPrices(prices);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+
+        ResponseEntity<OccupancyOptimizationResponse> response = testRestTemplate.postForEntity("/getOptimizedOccupancySummary",
+                new HttpEntity<>(request, headers), OccupancyOptimizationResponse.class);
+
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+        Assert.assertTrue("api response true", response.getBody().isSuccess());
+        Assert.assertNotNull("prices summaries not null", response.getBody().getPriceSummaries());
+        Assert.assertEquals("economy total price equals 189", response.getBody().getPriceSummaries().get(0).getTotalPrice(), BigDecimal.valueOf(189));
+        Assert.assertEquals("economy allocation 4", response.getBody().getPriceSummaries().get(0).getAllocation(),4);
+        Assert.assertEquals("premium total price equals 1054", response.getBody().getPriceSummaries().get(1).getTotalPrice(), BigDecimal.valueOf(1054));
+        Assert.assertEquals("premium allocation 6", response.getBody().getPriceSummaries().get(1).getAllocation(),6);
+    }
+
+
+    @Test
+    public void getOptimizedOccupancySummary_E7P2_Returns189_583() {
+        OccupancyOptimizationRequest request = new OccupancyOptimizationRequest();
+        List<RoomStock> roomStocks = new ArrayList<>();
+        roomStocks.add(new RoomStock(RoomType.ECONOMY,BigDecimal.ZERO,7));
+        roomStocks.add(new RoomStock(RoomType.PREMIUM,BigDecimal.valueOf(100),2));
+        request.setRoomStockList(roomStocks);
+        request.setPrices(prices);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+
+        ResponseEntity<OccupancyOptimizationResponse> response = testRestTemplate.postForEntity("/getOptimizedOccupancySummary",
+                new HttpEntity<>(request, headers), OccupancyOptimizationResponse.class);
+
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+        Assert.assertTrue("api response true", response.getBody().isSuccess());
+        Assert.assertNotNull("prices summaries not null", response.getBody().getPriceSummaries());
+        Assert.assertEquals("economy total price equals 189", response.getBody().getPriceSummaries().get(0).getTotalPrice(), BigDecimal.valueOf(189));
+        Assert.assertEquals("economy allocation 4", response.getBody().getPriceSummaries().get(0).getAllocation(),4);
+        Assert.assertEquals("premium total price equals 583", response.getBody().getPriceSummaries().get(1).getTotalPrice(), BigDecimal.valueOf(583));
+        Assert.assertEquals("premium allocation 2", response.getBody().getPriceSummaries().get(1).getAllocation(),2);
+    }
+
+
+    @Test
     public void getOptimizedOccupancySummary_E3P3_Returns167_738() {
         OccupancyOptimizationRequest request = new OccupancyOptimizationRequest();
         List<RoomStock> roomStocks = new ArrayList<>();
@@ -80,4 +130,56 @@ public class InsightsControllerTest {
         Assert.assertEquals("premium total price equals 738", response.getBody().getPriceSummaries().get(1).getTotalPrice(), BigDecimal.valueOf(738));
         Assert.assertEquals("premium allocation 3", response.getBody().getPriceSummaries().get(1).getAllocation(),3);
     }
+
+    @Test
+    public void getOptimizedOccupancySummary_E3P7_Returns189_1054() {
+        OccupancyOptimizationRequest request = new OccupancyOptimizationRequest();
+        List<RoomStock> roomStocks = new ArrayList<>();
+        roomStocks.add(new RoomStock(RoomType.ECONOMY,BigDecimal.ZERO,3));
+        roomStocks.add(new RoomStock(RoomType.PREMIUM,BigDecimal.valueOf(100),7));
+        request.setRoomStockList(roomStocks);
+        request.setPrices(prices);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+
+        ResponseEntity<OccupancyOptimizationResponse> response = testRestTemplate.postForEntity("/getOptimizedOccupancySummary",
+                new HttpEntity<>(request, headers), OccupancyOptimizationResponse.class);
+
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+        Assert.assertTrue("api response true", response.getBody().isSuccess());
+        Assert.assertNotNull("prices summaries not null", response.getBody().getPriceSummaries());
+        Assert.assertEquals("economy total price equals 189", response.getBody().getPriceSummaries().get(0).getTotalPrice(), BigDecimal.valueOf(189));
+        Assert.assertEquals("economy allocation 4", response.getBody().getPriceSummaries().get(0).getAllocation(),4);
+        Assert.assertEquals("premium total price equals 1054", response.getBody().getPriceSummaries().get(1).getTotalPrice(), BigDecimal.valueOf(1054));
+        Assert.assertEquals("premium allocation 6", response.getBody().getPriceSummaries().get(1).getAllocation(),6);
+    }
+
+    @Test
+    public void getOptimizedOccupancySummary_E2P7K1_Returns189_680_374() {
+        OccupancyOptimizationRequest request = new OccupancyOptimizationRequest();
+        List<RoomStock> roomStocks = new ArrayList<>();
+        roomStocks.add(new RoomStock(RoomType.ECONOMY,BigDecimal.ZERO,2));
+        roomStocks.add(new RoomStock(RoomType.PREMIUM,BigDecimal.valueOf(100),7));
+        roomStocks.add(new RoomStock(RoomType.KINGSUITE,BigDecimal.valueOf(300),1));
+        request.setRoomStockList(roomStocks);
+        request.setPrices(prices);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+
+        ResponseEntity<OccupancyOptimizationResponse> response = testRestTemplate.postForEntity("/getOptimizedOccupancySummary",
+                new HttpEntity<>(request, headers), OccupancyOptimizationResponse.class);
+
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+        Assert.assertTrue("api response true", response.getBody().isSuccess());
+        Assert.assertNotNull("prices summaries not null", response.getBody().getPriceSummaries());
+        Assert.assertEquals("economy total price equals 189", response.getBody().getPriceSummaries().get(0).getTotalPrice(), BigDecimal.valueOf(189));
+        Assert.assertEquals("economy allocation 4", response.getBody().getPriceSummaries().get(0).getAllocation(),4);
+        Assert.assertEquals("premium total price equals 680", response.getBody().getPriceSummaries().get(1).getTotalPrice(), BigDecimal.valueOf(680));
+        Assert.assertEquals("premium allocation 5", response.getBody().getPriceSummaries().get(1).getAllocation(),5);
+        Assert.assertEquals("king total price equals 374", response.getBody().getPriceSummaries().get(2).getTotalPrice(), BigDecimal.valueOf(374));
+        Assert.assertEquals("king allocation 1", response.getBody().getPriceSummaries().get(2).getAllocation(),1);
+    }
+
 }
