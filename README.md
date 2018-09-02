@@ -1,4 +1,4 @@
-## diff-service
+## smarthostapi
 Assignment project for Smart Host company.
 Based on room definitions and prices, optimized total allocation 
 and revenue will be returned.
